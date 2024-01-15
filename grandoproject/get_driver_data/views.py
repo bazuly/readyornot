@@ -16,6 +16,8 @@ def get_driver_data(request):
     
     return render(request, 'get_driver_data/get_driver_data.html', context)
 
+# разобраться со скачиванием файлов
+# если файла нет, либо выдавать ошибку, либо отключать кнопку
 
 def download_driver_data(request, driver_id):
     driver_data = get_object_or_404(UploadDriverData, pk=driver_id)
