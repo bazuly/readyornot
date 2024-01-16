@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'add_driver_data',
     'get_driver_data',
     'add_car_data',
+    'get_car_data'
     
 
 ]

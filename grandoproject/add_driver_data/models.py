@@ -27,6 +27,9 @@ class UploadDriverData(models.Model):
             self.files.name = os.path.join(folder_path, filename)
 
         super().save(*args, **kwargs)
+        
+    def has_file(self):
+        return bool(self.files) and os.path.exists(self.files.path)
 
     def __str__(self):
         return f'Данные водителя {self.name} добавлены'

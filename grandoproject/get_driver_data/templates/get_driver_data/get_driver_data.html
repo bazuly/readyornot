@@ -96,7 +96,11 @@
                 <span class="driver-data">
                     {{ data.other_data }}
                 </span>
-                <button class="download-button" onclick="downloadDriverData({{ data.id }})">Скачать архив</button>
+                {% if data.has_file %}
+                    <button class="download-button" onclick="downloadDriverData({{ data.id }})">Скачать архив</button>
+                {% else %}
+                    <button class="download-button" onclick="showNoFilePopup()">Скачать архив</button>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
@@ -110,6 +114,10 @@
         function downloadDriverData(driverId) {
             window.location.href = `/get_driver_data/download/${driverId}/`;
         }
+        function showNoFilePopup() {
+            alert('Файл для скачивания отсутствует.');
+        }
+
     </script>
 </body>
 </html>

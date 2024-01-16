@@ -16,7 +16,8 @@ def add_car_data(request):
             car_data.car_number = car_form.cleaned_data['car_number']
             car_data.trailer_name = car_form.cleaned_data['trailer_name']
             car_data.trailer_number = car_form.cleaned_data['trailer_number']
-            car_data.scan_doc = request.FILES.get('scan_doc')
+            car_data.car_scan_doc = request.FILES.get('car_scan_doc')
+            car_data.trailer_scan_doc = request.FILES.get('trailer_scan_doc')
             
             car_data.save()
             

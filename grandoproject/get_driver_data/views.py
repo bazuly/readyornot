@@ -3,7 +3,6 @@ from add_driver_data.models import UploadDriverData
 from django.http import FileResponse
 
 
-
 """
 Получение данных водителей
 Весь список
@@ -12,12 +11,14 @@ from django.http import FileResponse
 
 def get_driver_data(request):
     driver_data = UploadDriverData.objects.all()
+    
+    for data in driver_data:
+        data.has_file = data.has_file()
+        
     context = {'driver_data': driver_data}
     
     return render(request, 'get_driver_data/get_driver_data.html', context)
 
-# разобраться со скачиванием файлов
-# если файла нет, либо выдавать ошибку, либо отключать кнопку
 
 def download_driver_data(request, driver_id):
     driver_data = get_object_or_404(UploadDriverData, pk=driver_id)
