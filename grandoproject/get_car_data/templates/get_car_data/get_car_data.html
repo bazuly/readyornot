@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Datfa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c35;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            overflow-x: auto;
+        }
+
+        h2 {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .driver-item {
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid #525866;
+            border-radius: 4px;
+            background-color: #363b49;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .driver-item:hover {
+            background-color: #525866;
+        }
+
+        .driver-data {
+            display: none;
+        }
+
+        .driver-item.active .driver-data {
+            display: block;
+        }
+        
+        .download-button {
+            background-color: #525866;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .download-button:hover {
+            background-color: #363b49;
+        }
+        
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 16px;
+            border: 1px solid #525866;
+            border-radius: 4px;
+            padding: 16px;
+            background-color: #363b49;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Данные на Транспортные средства</h2>
+        <ul>
+            {% for data in car_data %}
+            <li class="car-item" ondblclick="toggleCarData(this)">
+                <span>{{ data.car_name }} - {{ data.car_number }}</span>
+                <span class="car-data">
+                    {{ data.car_scan_doc}}
+                </span>
+                {% if data.has_file %}
+                    <button class="download-button" onclick="downloadCarData('{{ data.id }}')">Скачать данные по машине</button>
+                {% else %}
+                    <button class="download-button" onclick="showNoFilePopup()">Скачать данные по машине</button>
+                {% endif %}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% comment %} 
+        <h2>Данные на Прицепы</h2>
+        <ul>
+            {% for data in trailer_data %}
+            <li class="trailer-item" ondblclick="toggleTrailerData(this)">
+                <span>{{ data.trailer_name }} - {{ data.trailer_number }}</span>
+                <span class="trailer-data">
+                    <div>{{ data.car_name }} - {{ data.car_number }}</div>
+                    
+                    <button class="download-button" onclick="downloadTrailerData('{{ data.id }}')">Скачать данные по прицепу</button>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div> {% endcomment %}
+
+    <script>
+        function toggleCarData(item) {
+            item.classList.toggle('active');
+        }
+
+        function toggleTrailerData(item) {
+            item.classList.toggle('active');
+        }
+
+        function downloadCarData(carId) {
+            window.location.href = `/get_car_data/download_car_data/${carId}/`;
+        }
+
+        function downloadTrailerData(trailerId) {
+            window.location.href = `/get_car_data/download_trailer_data/${trailerId}/`;
+        }
+
+        function showNoFilePopup() {
+            alert('Файл для скачивания отсутствует.');
+        }
+
+    </script>
+</body>
+</html>
