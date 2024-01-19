@@ -99,16 +99,16 @@
                     <p>{{ car_form.car_scan_doc.errors }}</p>
                 {% endif %}
 
-                <label for="{{ car_form.trailer_name.id_for_label }}">Марка полуприцепа:</label>
-                {{ car_form.trailer_name }}
+                <label for="{{ trailer_form.trailer_name.id_for_label }}">Марка полуприцепа:</label>
+                {{ trailer_form.trailer_name }}
 
-                <label for="{{ car_form.trailer_number.id_for_label }}">Номер полуприцепа:</label>
-                {{ car_form.trailer_number }}
+                <label for="{{ trailer_form.trailer_number.id_for_label }}">Номер полуприцепа:</label>
+                {{ trailer_form.trailer_number }}
 
-                <label for="{{ car_form.trailer_scan_doc.id_for_label}}">Загрузочные файлы:</label>
+                <label for="{{ trailer_form.trailer_scan_doc.id_for_label}}">Загрузочные файлы:</label>
                 <input type="file" name="trailer_scan_doc" accept=".zip" multiple>
-                {% if car_form.trailer_scan_doc.errors %}
-                    <p>{{ car_form.trailer_scan_doc.errors }}</p>
+                {% if trailer_form.trailer_scan_doc.errors %}
+                    <p>{{ trailer_form.trailer_scan_doc.errors }}</p>
                 {% endif %}
 
 
