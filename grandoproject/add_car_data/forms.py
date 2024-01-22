@@ -5,7 +5,7 @@ from .models import UploadCarData, UploadTrailerData
 class CarForm(forms.ModelForm):
     class Meta:
         model = UploadCarData
-        fields = ['car_name', 'car_number','car_scan_doc']
+        fields = ['car_name', 'car_number','car_scan_doc', 'tonnage', 'capacity']
         
 
 class TrailerForm(forms.ModelForm):

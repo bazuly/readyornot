@@ -1,19 +1,33 @@
+
 from django.db import models
 import os
 from django.core.validators import FileExtensionValidator
 
 
-"""
-Добавление данных транспортых средств
-"""
-
 
 class UploadCarData(models.Model):
+    "Добавление данных транспортых средств"
+    
     car_name = models.CharField(max_length=50, null=True, blank=True)
     car_number = models.CharField(max_length=48, null=True, blank=True)
     
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    TONNAGE_CHOICES = [
+        (1.5, '1.5 тонны'),
+        (2, '2 тонны'),
+        (3, '3 тонны'),
+        (5, '5 тонн'),
+        (7, '7 тонн'),
+        (10, '10 тонн'),
+        (20, '20 тонн'),
+    ]
+    
+    tonnage = models.FloatField(choices=TONNAGE_CHOICES, blank=True, null=True)
+    
+    # кол-во паллет
+    capacity = models.IntegerField(null=True)
 
     car_scan_doc = models.FileField(blank=True, null=True,
                                 upload_to='car_data/',
@@ -38,14 +52,9 @@ class UploadCarData(models.Model):
     
     
     
-    
-"""
-Добавление данных полуприцепов
-"""
-    
-    
-    
+  
 class UploadTrailerData(models.Model):
+    "Добавление данных полуприцепов"
     trailer_name = models.CharField(null=True, 
                                     max_length=24, 
                                     blank=True)

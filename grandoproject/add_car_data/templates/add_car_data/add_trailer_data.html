@@ -87,30 +87,26 @@
             <h2>Добавить данные на ТС</h2>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <label for="{{ car_form.car_name.id_for_label }}">Марка авто:</label>
-                {{ car_form.car_name }}
 
-                <label for="{{ car_form.car_number.id_for_label }}">Номер машины:</label>
-                {{ car_form.car_number }}
+                <label for="{{ trailer_form.trailer_name.id_for_label }}">Марка полуприцепа:</label>
+                {{ trailer_form.trailer_name }}
 
-                <label for="{{ form.tonnage.id_for_label }}">Тоннажность:</label>
-                {{ car_form.tonnage }}
+                <label for="{{ trailer_form.trailer_number.id_for_label }}">Номер полуприцепа:</label>
+                {{ trailer_form.trailer_number }}
 
-                <label for="{{ car_form.capacity.id_for_label }}">Вместимость паллет:</label>
-                {{ car_form.capacity }}
-
-                <label for="{{ car_form.car_scan_doc.id_for_label}}">Загрузочные файлы:</label>
-                <input type="file" name="car_scan_doc" accept=".zip" multiple>
-                {% if car_form.car_scan_doc.errors %}
-                    <p>{{ car_form.car_scan_doc.errors }}</p>
+                <label for="{{ trailer_form.trailer_scan_doc.id_for_label}}">Загрузочные файлы:</label>
+                <input type="file" name="trailer_scan_doc" accept=".zip" multiple>
+                {% if trailer_form.trailer_scan_doc.errors %}
+                    <p>{{ trailer_form.trailer_scan_doc.errors }}</p>
                 {% endif %}
 
-                <button type="submit" id="save-car-button">Сохранить данные на ТС</button>
+
+                <button type="submit" id="save-trailer-button">Сохранить данные на ТС</button>
             </form>
         </div>
     </div>
     <script>
-        document.getElementById('save-car-button').addEventListener('click', function(event) {
+        document.getElementById('save-trailer-button').addEventListener('click', function(event) {
             event.preventDefault();  
             saveData('Ваши данные на транспортное средство успешно добавлены');
         });
@@ -123,7 +119,7 @@
                 confirmButtonText: 'Ок',
                 timer: 5000
             }).then(() => {
-                document.getElementById('save-car-button').closest('form').submit();
+                document.getElementById('save-trailer-button').closest('form').submit();
             });
         }
     </script>
