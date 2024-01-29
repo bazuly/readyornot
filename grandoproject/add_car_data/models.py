@@ -55,6 +55,7 @@ class UploadCarData(models.Model):
   
 class UploadTrailerData(models.Model):
     "Добавление данных полуприцепов"
+    
     trailer_name = models.CharField(null=True, 
                                     max_length=24, 
                                     blank=True)
@@ -71,7 +72,7 @@ class UploadTrailerData(models.Model):
                                 validators=[FileExtensionValidator(allowed_extensions=['zip'])])
     
     def has_file(self):
-        return bool(self.trailer_scan_doc) and os.path.exists(self.trailer_scan_doc)
+        return bool(self.trailer_scan_doc) and os.path.exists(self.trailer_scan_doc.path)
      
     def save(self, *args, **kwargs):
         if self.trailer_scan_doc:

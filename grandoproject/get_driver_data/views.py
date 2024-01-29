@@ -26,3 +26,4 @@ def download_driver_data(request, driver_id):
     response = FileResponse(open(file_path, 'rb'), as_attachment=True)
     return response
 
+

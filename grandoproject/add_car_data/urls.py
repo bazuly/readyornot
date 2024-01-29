@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import * 
+from .views import add_car_data, add_trailer_data
 
 
 app_name = 'add_car_data'

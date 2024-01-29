@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление данных водителя {% endblock %}
+
+{% block header %}Добавление данных водителя {% endblock %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -87,6 +93,7 @@
     </style>
 </head>
 <body>
+    {% block content %}
     <div class="container">
         <h2>Данные водителей</h2>
         <ul>
@@ -119,5 +126,6 @@
         }
 
     </script>
+    {% endblock content %}
 </body>
 </html>

@@ -1,4 +1,5 @@
-<!-- add_driver_data.html -->
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -82,6 +83,7 @@
     </style>
 </head>
 <body>
+    {% block content %}
     <div class="form-container">
         <div class="form-column left-column">
             <h2>Добавить данные водителя</h2>
@@ -122,5 +124,6 @@
             });
         }
     </script>
+    {% endblock content %}
 </body>
 </html>

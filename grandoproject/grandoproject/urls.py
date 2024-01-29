@@ -2,9 +2,10 @@ from django.contrib import admin
 from django.urls import path, include
 from grandoproject import settings
 from django.conf.urls.static import static
-
+from .views import home_page
 
 urlpatterns = [
+    path('', home_page, name='home_page'),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace='blog')),
     path('add_driver_data/', include('add_driver_data.urls', namespace='add_driver_data')),

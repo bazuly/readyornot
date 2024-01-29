@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import UploadCarData, UploadTrailerData
 from .forms import CarForm, TrailerForm
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 """
@@ -24,7 +26,7 @@ def add_car_data(request):
             
             print('car data saved successfully')
             
-            return redirect('add_car_data:add_car_data')
+            return HttpResponseRedirect(reverse('add_car_data:add_car_data'))
         else:
             print('Form is not valid', car_form.errors)
 

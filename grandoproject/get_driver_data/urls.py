@@ -7,3 +7,4 @@ urlpatterns = [
     path('download/<int:driver_id>/', download_driver_data, name='download_driver_data'),
     path('', get_driver_data, name='get_driver_data'),
 ]
+

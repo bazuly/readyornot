@@ -1,10 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление данных по машине{% endblock %}
+
+{% block header %}Добавление данных по машине{% endblock %}
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Datfa</title>
+    <title>Car Data</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,8 +73,12 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 8px;
+            text-align: center; 
+            display: block; 
+            width: fit-content; 
+            margin: auto; 
         }
-        
+    
         .download-button:hover {
             background-color: #363b49;
         }
@@ -82,61 +93,62 @@
             padding: 16px;
             background-color: #363b49;
         }
-
+        
+        .trailer-item {
+            border-bottom: 1px solid #525866; /* Добавляем линии-разделители между элементами */
+            padding-bottom: 16px; /* Отступ снизу для более красивого отображения */
+        }
+    
+        .trailer-data {
+            display: flex;
+            flex-direction: column; /* Отображение данных по вертикали */
+        }
+    
+        .download-button {
+            background-color: #525866;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+    
+        .download-button:hover {
+            background-color: #363b49;
+        }
 
     </style>
 </head>
 <body>
+    {% block content %}
     <div class="container">
         <h2>Данные на Транспортные средства</h2>
         <ul>
             {% for data in car_data %}
             <li class="car-item" ondblclick="toggleCarData(this)">
-                <span>{{ data.car_name }} - {{ data.car_number }}</span>
+                <span>{{ data.car_name }} {{ data.car_number }}</span>
                 <span class="car-data">
-                    {{ data.car_scan_doc}}
-                </span>
                 {% if data.has_file %}
-                    <button class="download-button" onclick="downloadCarData('{{ data.id }}')">Скачать данные по машине</button>
+                    <a href="{{ data.car_scan_doc.url }}" class="download-button" download>Скачать скан документов</a>
                 {% else %}
-                    <button class="download-button" onclick="showNoFilePopup()">Скачать данные по машине</button>
+                    <button class="download-button" onclick="showNoFilePopup()">Скачать скан документов</button>
                 {% endif %}
                 </span>
+                        
             </li>
             {% endfor %}
         </ul>
+        
     </div>
-{% comment %} 
-        <h2>Данные на Прицепы</h2>
-        <ul>
-            {% for data in trailer_data %}
-            <li class="trailer-item" ondblclick="toggleTrailerData(this)">
-                <span>{{ data.trailer_name }} - {{ data.trailer_number }}</span>
-                <span class="trailer-data">
-                    <div>{{ data.car_name }} - {{ data.car_number }}</div>
-                    
-                    <button class="download-button" onclick="downloadTrailerData('{{ data.id }}')">Скачать данные по прицепу</button>
-                </span>
-            </li>
-            {% endfor %}
-        </ul>
-    </div> {% endcomment %}
 
     <script>
         function toggleCarData(item) {
             item.classList.toggle('active');
         }
 
-        function toggleTrailerData(item) {
-            item.classList.toggle('active');
-        }
-
         function downloadCarData(carId) {
-            window.location.href = `/get_car_data/download_car_data/${carId}/`;
-        }
-
-        function downloadTrailerData(trailerId) {
-            window.location.href = `/get_car_data/download_trailer_data/${trailerId}/`;
+            window.location.href = `/get_car_data/download/${carId}/`;
         }
 
         function showNoFilePopup() {
@@ -144,5 +156,6 @@
         }
 
     </script>
+    {% endblock content %}
 </body>
 </html>

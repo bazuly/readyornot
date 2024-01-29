@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonenumber_field',
     'blog',
     'add_driver_data',
     'get_driver_data',
@@ -48,7 +47,7 @@ ROOT_URLCONF = 'grandoproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'grandoproject/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
