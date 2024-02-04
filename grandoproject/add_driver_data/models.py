@@ -20,7 +20,7 @@ class UploadDriverData(models.Model):
     def save(self, *args, **kwargs):
         if self.files:
             filename = os.path.basename(self.files.name)
-            folder_path = os.path.join('driver_data', self.name)
+            folder_path = os.path.join('driver_data', self.name) # убрать дублирование директорий 
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
 

@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from add_car_data.models import UploadCarData, UploadTrailerData
 from django.http import FileResponse
+from django.contrib.auth.decorators import login_required
 
 """
 Получение данных на транспортное средство
 """
 
 
+@login_required
 def get_car_data(request):
     car_data = UploadCarData.objects.all()
 
@@ -18,6 +20,7 @@ def get_car_data(request):
     return render(request, 'get_car_data/get_car_data.html', context)
 
 
+@login_required
 # можно сделать лучше
 def download_car_data(request, car_id):
     car_data = get_object_or_404(UploadCarData, pk=car_id)
@@ -26,6 +29,7 @@ def download_car_data(request, car_id):
     return response
 
 
+@login_required
 def get_trailer_data(request):
     trailer_data = UploadTrailerData.objects.all()
 
@@ -37,6 +41,7 @@ def get_trailer_data(request):
     return render(request, 'get_car_data/get_trailer_data.html', context)
 
 
+@login_required
 def download_trailer_data(request, trailer_id):
     trailer_data = get_object_or_404(UploadTrailerData, pk=trailer_id)
     file_path = trailer_data.trailer_scan_doc.path

@@ -27,8 +27,9 @@ INSTALLED_APPS = [
     'add_driver_data',
     'get_driver_data',
     'add_car_data',
-    'get_car_data'
-    
+    'get_car_data',
+    'manager_client',
+    'users'
 
 ]
 
@@ -113,3 +114,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+LOGIN_REDIRECT_URL = 'home_page'
+LOGIN_URL = 'users:login'
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "users.auth.EmailAuthBackend"
+]

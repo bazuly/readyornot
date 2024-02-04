@@ -36,7 +36,7 @@ class UploadCarData(models.Model):
     def save(self, *args, **kwargs):
         if self.car_scan_doc:
             filename = os.path.basename(self.car_scan_doc.name)
-            folder_path = os.path.join('car_data', self.car_name)
+            folder_path = os.path.join('car_data', self.car_name) # убрать дублирвоание директорий
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
 
@@ -77,7 +77,7 @@ class UploadTrailerData(models.Model):
     def save(self, *args, **kwargs):
         if self.trailer_scan_doc:
             filename = os.path.basename(self.trailer_scan_doc.name)
-            folder_path = os.path.join('trailer_data', self.trailer_name)
+            folder_path = os.path.join('trailer_data', self.trailer_name) # убрать дублирование директорий 
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)         
             self.trailer_scan_doc.name = os.path.join(folder_path, filename)     

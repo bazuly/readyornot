@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import UploadDriverData
 from .forms import DriverForm
+from django.contrib.auth.decorators import login_required
 
 """
 Добавление данных водителей
 """
 
 
+@login_required
 def add_driver_data(request):
     if request.method == 'POST':
         driver_form = DriverForm(request.POST, request.FILES)
