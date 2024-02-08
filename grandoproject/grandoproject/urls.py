@@ -8,7 +8,6 @@ urlpatterns = [
     path('home_page/', home_page, name='home_page'),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls', namespace='users')),
-    path('blog/', include('blog.urls', namespace='blog')),
     path('add_driver_data/', include('add_driver_data.urls', namespace='add_driver_data')),
     path('get_driver_data/', include('get_driver_data.urls', namespace='get_driver_data')),
     path('add_car_data/', include('add_car_data.urls', namespace='add_car_data')),
