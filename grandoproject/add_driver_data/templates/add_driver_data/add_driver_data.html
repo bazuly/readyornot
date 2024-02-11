@@ -80,6 +80,18 @@
             cursor: pointer;
             font-size: 18px;
         }
+
+        #save-driver-button {
+            margin-bottom: 20px; /* Увеличьте значение по вашему усмотрению */
+            background-color: 	#00BFFF;
+        }
+
+        .button-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            color: #ADD8E6;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +115,7 @@
                 <input type="file" name="files" accept=".zip" multiple>
 
                 <button type="submit" id="save-driver-button">Сохранить водителя</button>
+                <button type="button" onclick="window.location.href='{% url 'home_page' %}'">Вернуться на главную страницу</button>
             </form>
         </div>
     </div>

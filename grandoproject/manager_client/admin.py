@@ -1,14 +1,8 @@
 from django.contrib import admin
-from .models import Tag, Client
+from .models import Client
 
-# admin.site.register(Tag, Client)
-#
-#
-# class Tag(admin.ModelAdmin):
-#     list_display = ['name']
-#     save_on_top = True
-#
-#
-# @admin.register(Client)
-# class Client(admin.ModelAdmin):
-#     list_display = ['name', 'inn', 'manager']
+admin.site.register(Client)
+
+
+class Client(admin.ModelAdmin):
+    list_display = ['name', 'contacts', 'manager']

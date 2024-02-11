@@ -1,36 +1,33 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from .models import Client, Tag
-from .forms import ClientForm, TagForm
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
+from .forms import ClientForm
+from .models import Client
 
+""" 
+Разобраться какого хера работает только по таким здоровым путевым ссылкам
+Хуета какаета чес слово
 """
-Добавление клиента
-"""
 
 
-def add_client(request):
-    if request.method == 'POST':
-        client_form = ClientForm(request.POST, prefix='client')
-        if client_form.is_valid():
-            trailer_data = Client(
-                name=client_form.cleaned_data['name'],
-                inn=client_form.cleaned_data['inn'],
-                contacts=client_form.cleaned_data['contacts'],
-                tag=client_form.cleaned_data['tag']
+# @login_required
+class ClientCreateView(CreateView):
+    model = Client
+    form_class = ClientForm
+    template_name = '/home/bazuly/developer/readyornot/grandoproject/manager_client/templates/сlient/new_client.html'
+    success_url = reverse_lazy('manager_client:new_client_success')
 
-            )
 
-            trailer_data.save()
+def new_client_success(request):
+    return render(request,
+                  '/home/bazuly/developer/readyornot/grandoproject/manager_client/templates/сlient/new_client_success.html')
 
-            return HttpResponseRedirect(reverse('manager_client:manager_client'))
+@login_required
+def get_client_data(request):
+    client_data = Client.objects.all()
+    context = {'client_data': client_data}
 
-        else:
-            print('Form in not valid', client_form.errors)
-
-#
-# def manager_clietns(request, client_id):
-#     manager = Manager.objects.get(pk=client_id)
-#     clients = manager.client_set.all()
-#     context = {'clients': clients, 'manager': manager}
-#     return render(request, 'manager_client.html', context)
+    return render(request,
+                  '/home/bazuly/developer/readyornot/grandoproject/manager_client/templates/сlient/list_client.html',
+                  context)
