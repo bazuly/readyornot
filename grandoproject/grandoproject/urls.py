@@ -12,7 +12,8 @@ urlpatterns = [
     path('get_driver_data/', include('get_driver_data.urls', namespace='get_driver_data')),
     path('add_car_data/', include('add_car_data.urls', namespace='add_car_data')),
     path('get_car_data/', include('get_car_data.urls', namespace='get_car_data')),
-    path('manager_client/', include('manager_client.urls', namespace='manager_client'))
+    path('manager_client/', include('manager_client.urls', namespace='manager_client')),
+    path('delivery_report/', include('delivery_report.urls', namespace='delivery_report'))
 
 ]
 

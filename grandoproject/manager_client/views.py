@@ -23,6 +23,7 @@ def new_client_success(request):
     return render(request,
                   '/home/bazuly/developer/readyornot/grandoproject/manager_client/templates/сlient/new_client_success.html')
 
+
 @login_required
 def get_client_data(request):
     client_data = Client.objects.all()
