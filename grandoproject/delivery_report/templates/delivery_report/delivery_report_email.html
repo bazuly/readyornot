@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Рассылка клиентам на почту </h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}"/>
+    <label for="{{ report_form.client.id_for_label }}">Клиент:</label>
+    {{ report_form.client }}
+    <br>
+    <label for="{{ report_form.direction.id_for_label }}">Направление/Торговая точка:</label>
+    {{ report_form.direction }}
+    <br>
+    <label for="{{ report_form.message.id_for_label }}">Сообщение:</label>
+    {{ report_form.message }}
+    <br>
+    <label for="{{ report_form.email.id_for_label }}">E-mail:</label>
+    {{ report_form.email }}
+    <br>
+    <p><button type="submit">Сохранить отчет</button></p>
+</form>
+
+{% endblock %}

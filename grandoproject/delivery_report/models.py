@@ -23,7 +23,21 @@ class DeliveryReport(models.Model):
 
     def __str__(self):
         return f'Отчет по направлению {self.direction} успешно обновлен'
-#
+
+
+class EmailReportToClientSuccess(models.Model):
+    """
+    Модель используется для оповещения клиентов
+    при успешной доставке груза
+    """
+
+    direction = models.CharField(max_length=128, null=False)
+    message = models.TextField(max_length=1024, blank=True, null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f'Отчет клиентам: "{self.client}" успешно отправлен'
+
 # class UnsuccessfulReport(models.Model):
 #     """
 #     Модель используется для оповещения клиентов и записи данных,
@@ -42,23 +56,9 @@ class DeliveryReport(models.Model):
 #     # подумать как это реализовать лучше, пока я в замешательстве
 #
 #
-# class SuccessReport(models.Model):
-#     """
-#     Модель используется для оповещения клиентов
-#     при успешной доставке груза
-#     """
-#     CLIENT_NAME_CHOICES = [(client.name, client.name) for client in Client.objects.all()]
-#     name = models.CharField(max_length=128,
-#                             choices=CLIENT_NAME_CHOICES)  # сделать, чтобы можно было выбирать сразу несколько
-#     message = models.TextField(max_length=1024, blank=True, null=True)
-#     email = models.EmailField(max_length=128)
-#
-#     def __str__(self):
-#         return f'Отчет клиентам: "{self.name}" успешно отправлен'
 #
 # # СДЕЛАТЬ АВТОМАТИЧЕСКУЮ РАССЫЛКУ КЛИЕНТАМ ПРОСТО ИЛИ ТОЛЬКО ПРИ ОПОЗДАНИИ через CELERY
 # # или при возврате продукции, но если возврат, то надо отправлять только тому клиенту, у которого возврат
 # # думаю сделать флажки опоздания (значит отправка всем клиентам), если возврат, то выбираем одного
 # # будем ссылаться на модель клиентов и контакты (почта конкретно) ее вычлинять и будем. Тогда надо будет сделать отдельную
 # # переменную в модели клиента, где будет храниться почта или почты, на которую можноо сообщить о возвратной продукции
-

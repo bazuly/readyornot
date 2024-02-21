@@ -1,5 +1,4 @@
 from django.db import models
-# from delivery_report.models import DeliveryReport
 
 
 class Client(models.Model):
@@ -21,11 +20,7 @@ class Client(models.Model):
     name = models.CharField(max_length=128, null=False)
     contacts = models.TextField(max_length=700)
     manager = models.CharField(max_length=128, blank=True, null=True, choices=MANAGER_CHOICES)
-    main_email = models.EmailField(max_length=128, blank=True, null=True) # использовать для рассылки писем
-
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     DeliveryReport.CLIENT_NAME_CHOICES = [(client.name, client.name) for client in Client.objects.all()]
+    main_email = models.EmailField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.name
