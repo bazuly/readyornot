@@ -21,18 +21,23 @@ class DeliveryReportForm(forms.ModelForm):
 class EmailReportToClientForm(forms.ModelForm):
     class Meta:
         model = EmailReportToClientSuccess
-        fields = ['client', 'direction', 'message']
+        fields = ['clients', 'direction', 'message', 'date']
         widgets = {
-            'client': forms.Select(attrs={'class': 'form-control'}),
+            'clients': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+            'date': forms.TextInput(attrs={'class': 'form-control'}),
             'direction': forms.TextInput(attrs={'class': 'form-control'}),
             'message': forms.Textarea(attrs={'class': 'form-control'}),
 
         }
 
+        clients = forms.ModelMultipleChoiceField(
+            queryset=Client.objects.all(),
+            widget=forms.CheckboxSelectMultiple
+        )
+
         def __init__(self, *args, **kwargs):
             super(EmailReportToClientForm, self).__init__(*args, **kwargs)
-            self.fields['client'].queryset = Client.objects.all()
-            self.fields['message'].widget = forms.Textarea(attrs={'class': 'form-control'})
+            self.fields['clients'].queryset = Client.objects.all()
 
     # # скорее всего надо будет реализовать возможность загрузки нескольких файлов
 # class UnsuccessfulReportForm(forms.Form):

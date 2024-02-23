@@ -45,24 +45,26 @@ def delivery_report_history(request):
 @login_required()
 def delivery_report_email(request):
     if request.method == 'POST':
-        print('1')
         report_form = EmailReportToClientForm(request.POST)
         if report_form.is_valid():
-            print('2')
             try:
                 report_instance = EmailReportToClientSuccess(
-                    client=report_form.cleaned_data['client'],
                     direction=report_form.cleaned_data['direction'],
                     message=report_form.cleaned_data['message'],
-                    )
-                report_instance.save()
+                    date=report_form.cleaned_data['date']
+                )
 
-                client_emails = [report_instance.client.main_email]
-                subject = f'Отчет по доставке {report_instance.direction}'
-                message = f'письмо успешно отправлено {report_instance.client} отчет по направление ' \
-                          f'{report_instance.direction} + {report_instance.message}'
-                email = EmailMessage(subject, message, to=client_emails)
-                email.send()
+                report_instance.save()
+                clients = report_form.cleaned_data['clients']
+                report_instance.clients.set(clients)
+
+                for client in clients:
+                    client_email = client.main_email
+                    subject = f'Отчет по доставке {report_instance.direction} за {report_instance.date}'
+                    message = f'{report_instance.message}'
+                    email = EmailMessage(subject, message, to=[client_email],
+                                         cc=['serejka50@gmail.com'])  # transport@grando.pro
+                    email.send()
 
                 return HttpResponseRedirect(reverse('delivery_report:delivery_report_history'))
 

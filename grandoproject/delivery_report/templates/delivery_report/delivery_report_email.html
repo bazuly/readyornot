@@ -6,8 +6,11 @@
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}"/>
-    <label for="{{ report_form.client.id_for_label }}">Клиент:</label>
-    {{ report_form.client }}
+    <label for="{{ report_form.clients.id_for_label }}">Клиент:</label>
+    {{ report_form.clients }}
+    <br>
+    <label for="{{ report_form.date.id_for_label }}">Дата доставки:</label>
+    {{ report_form.date }}
     <br>
     <label for="{{ report_form.direction.id_for_label }}">Направление/Торговая точка:</label>
     {{ report_form.direction }}
@@ -18,7 +21,9 @@
     <label for="{{ report_form.email.id_for_label }}">E-mail:</label>
     {{ report_form.email }}
     <br>
-    <p><button type="submit">Сохранить отчет</button></p>
+    <p>
+        <button type="submit">Сохранить отчет</button>
+    </p>
 </form>
 
 {% endblock %}

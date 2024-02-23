@@ -32,33 +32,27 @@ class EmailReportToClientSuccess(models.Model):
     """
 
     direction = models.CharField(max_length=128, null=False)
-    message = models.TextField(max_length=1024, blank=True, null=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True, blank=True)
+    message = models.TextField(max_length=2048, blank=True, null=True)
+    clients = models.ManyToManyField(Client)
+    date = models.CharField(max_length=64, blank=True, null=True)
 
     def __str__(self):
-        return f'Отчет клиентам: "{self.client}" успешно отправлен'
+        return f'Отчет клиентам: "{self.clients}" успешно отправлен'
 
-# class UnsuccessfulReport(models.Model):
+
+# сделать возможность отправлять клиентам письма
+# оповещать о проблеме и сразу отправлять данные на водителя?
+# рассылка нескольким клиентам, если кого-то не выгружают и/или опаздываем
+# class ProblemEmailReport(models.Model):
 #     """
 #     Модель используется для оповещения клиентов и записи данных,
 #     когда на ТТ есть возвратная продукция или возникают какие-либо проблемы
 #     """
-#     CLIENT_NAME_CHOICES = [(client.name, client.name) for client in Client.objects.all()]
 #
-#     returned_client = models.CharField(max_length=128, choices=CLIENT_NAME_CHOICES)
-#     returned_goods_description = models.TextField(max_length=512, blank=True, null=True)
-#     returned_goods_photo = models.ImageField(blank=True, null=True,
-#                                              upload_to=f'returned_goods/{returned_client}/%Y/%m/%d/')
+#     clients = models.ManyToManyField(Client)
+#     message = models.TextField(max_length=2048, blank=True, null=True)
 #     email_to_send = models.EmailField(max_length=128)
 #
 #     def __str__(self):
-#         return f'Отчет о расхождениях клиентам: "{self.returned_client}" успешно отправлен'
-#     # подумать как это реализовать лучше, пока я в замешательстве
-#
-#
-#
-# # СДЕЛАТЬ АВТОМАТИЧЕСКУЮ РАССЫЛКУ КЛИЕНТАМ ПРОСТО ИЛИ ТОЛЬКО ПРИ ОПОЗДАНИИ через CELERY
-# # или при возврате продукции, но если возврат, то надо отправлять только тому клиенту, у которого возврат
-# # думаю сделать флажки опоздания (значит отправка всем клиентам), если возврат, то выбираем одного
-# # будем ссылаться на модель клиентов и контакты (почта конкретно) ее вычлинять и будем. Тогда надо будет сделать отдельную
-# # переменную в модели клиента, где будет храниться почта или почты, на которую можноо сообщить о возвратной продукции
+#         return self.clients
+

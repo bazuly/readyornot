@@ -34,7 +34,7 @@ class UploadCarData(models.Model):
     def save(self, *args, **kwargs):
         if self.car_scan_doc:
             filename = os.path.basename(self.car_scan_doc.name)
-            folder_path = os.path.join('car_data', self.car_name)  # убрать дублирвоание директорий
+            folder_path = os.path.join(self.car_name)
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
 
@@ -50,7 +50,7 @@ class UploadCarData(models.Model):
 
 
 class UploadTrailerData(models.Model):
-    "Добавление данных полуприцепов"
+    """Добавление данных полуприцепов"""
 
     trailer_name = models.CharField(null=True,
                                     max_length=24,
@@ -73,7 +73,7 @@ class UploadTrailerData(models.Model):
     def save(self, *args, **kwargs):
         if self.trailer_scan_doc:
             filename = os.path.basename(self.trailer_scan_doc.name)
-            folder_path = os.path.join('trailer_data', self.trailer_name)  # убрать дублирование директорий
+            folder_path = os.path.join(self.trailer_name)
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
             self.trailer_scan_doc.name = os.path.join(folder_path, filename)
