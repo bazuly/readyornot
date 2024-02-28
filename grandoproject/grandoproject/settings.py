@@ -29,8 +29,10 @@ INSTALLED_APPS = [
     'get_car_data',
     'manager_client',
     'users',
-    'delivery_report'
-
+    'delivery_report',
+    'django_select2',
+    'crispy_forms',
+    "crispy_bootstrap5"
 ]
 
 MIDDLEWARE = [
@@ -48,7 +50,7 @@ ROOT_URLCONF = 'grandoproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'grandoproject/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +112,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -144,3 +149,7 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 AUTH_USER_MODEL = 'users.User'
 
 DEFAULT_USER_IMAGE = MEDIA_URL + 'users/default.png'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

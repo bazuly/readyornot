@@ -1,0 +1,96 @@
+ {% load static %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Главная страница{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <h1>{% block header %}Сайт Грандобля{% endblock %}</h1>
+
+    <style>
+        html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static "background/3.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+<!--            background: linear-gradient(315deg, rgb(181,165,128) 0%, rgb(42,75,63) 100%);-->
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+<!--            background: linear-gradient(315deg, rgb(181,165,128) 0%, rgb(42,75,63) 100%);-->
+            padding: 10px; /* Добавьте отступы вокруг навигации */
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+        main {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="{% url 'home_page' %}"> Главная страница </a>
+        <a href="{% url 'add_driver_data:add_driver_data' %}">Добавить водителя</a>
+        <a href="{% url 'add_car_data:add_car_data' %}">Добавить машину</a>
+        <a href="{% url 'add_car_data:add_trailer_data' %}">Добавить прицеп</a>
+        <a href="{% url 'get_car_data:get_car_data' %}">Скачать данные по машинам</a>
+        <a href="{% url 'get_car_data:get_trailer_data' %}">Скачать данные по прицепам</a>
+        <a href="{% url 'get_driver_data:get_driver_data' %}">Скачать данные по водителям</a></a>
+        <a href="{% url 'manager_client:add_client' %}">Добавить клиента</a></a>
+        <a href="{% url 'manager_client:get_client_data' %}">Контакты клиентов</a></a>
+        <a href="{% url 'delivery_report:delivery_report_create' %}">Отчет по доставке регионов</a></a>
+        <a href="{% url 'delivery_report:delivery_report_history' %}">История отчетов</a></a>
+        <a href="{% url 'delivery_report:delivery_report_email' %}"> Рассылка на почту </a></a>
+        <a href="{% url 'users:login' %}"> Вход </a>
+        <a href="{% url 'users:profile' %}"> Профиль </a>
+        <a href="{% url 'users:logout' %}"> Выйти </a>
+        <a href="{% url 'users:register' %}"> Регистрация </a>
+
+
+    </nav>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+{% block scripts %}
+
+{% endblock %}
+</body>
+</html>

@@ -62,8 +62,8 @@ def delivery_report_email(request):
                     client_email = client.main_email
                     subject = f'Отчет по доставке {report_instance.direction} за {report_instance.date}'
                     message = f'{report_instance.message}'
-                    email = EmailMessage(subject, message, to=[client_email],
-                                         cc=['serejka50@gmail.com'])  # transport@grando.pro
+                    email = EmailMessage(subject, message, to=[client_email], )
+                    # cc=['transport@grando.pro'])
                     email.send()
 
                 return HttpResponseRedirect(reverse('delivery_report:delivery_report_history'))
