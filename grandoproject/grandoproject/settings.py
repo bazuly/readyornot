@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'delivery_report',
     'django_select2',
     'crispy_forms',
-    "crispy_bootstrap5"
+    "crispy_bootstrap5",
+    "grando_blog"
 ]
 
 MIDDLEWARE = [
