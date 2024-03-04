@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'add_driver_data',
     'get_driver_data',
     'add_car_data',
@@ -33,7 +34,7 @@ INSTALLED_APPS = [
     'django_select2',
     'crispy_forms',
     "crispy_bootstrap5",
-    "grando_blog"
+    "grando_blog",
 ]
 
 MIDDLEWARE = [

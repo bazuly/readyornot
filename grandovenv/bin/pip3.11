@@ -1,4 +1,4 @@
-#!/home/bazuly/developer/readyornot/grandovenv/bin/python
+#!/Users/sergejbalioz/Developer/readyornot/grandovenv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
