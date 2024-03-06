@@ -18,7 +18,7 @@ class DeliveryReport(models.Model):
     commentary = models.TextField(max_length=256, blank=True, null=True)
     # Список перевозимых поставщиков
     client_list = models.TextField(max_length=256, choices=CLIENT_NAME_CHOICES)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     dispatcher = models.CharField(max_length=128, choices=DISPATCHER_CHOICES)
 
     def __str__(self):
@@ -38,21 +38,4 @@ class EmailReportToClientSuccess(models.Model):
 
     def __str__(self):
         return f'Отчет клиентам: "{self.clients}" успешно отправлен'
-
-
-# сделать возможность отправлять клиентам письма
-# оповещать о проблеме и сразу отправлять данные на водителя?
-# рассылка нескольким клиентам, если кого-то не выгружают и/или опаздываем
-# class ProblemEmailReport(models.Model):
-#     """
-#     Модель используется для оповещения клиентов и записи данных,
-#     когда на ТТ есть возвратная продукция или возникают какие-либо проблемы
-#     """
-#
-#     clients = models.ManyToManyField(Client)
-#     message = models.TextField(max_length=2048, blank=True, null=True)
-#     email_to_send = models.EmailField(max_length=128)
-#
-#     def __str__(self):
-#         return self.clients
 

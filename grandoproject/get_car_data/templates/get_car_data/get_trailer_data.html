@@ -12,116 +12,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Data</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #282c35;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 80%;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-            overflow-x: auto;
-        }
-
-        h2 {
-            text-align: left;
-            margin-bottom: 32px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .driver-item {
-            margin-bottom: 16px;
-            padding: 16px;
-            border: 1px solid #525866;
-            border-radius: 4px;
-            background-color: #363b49;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .driver-item:hover {
-            background-color: #525866;
-        }
-
-        .driver-data {
-            display: none;
-        }
-
-        .driver-item.active .driver-data {
-            display: block;
-        }
-        
-        .download-button {
-            background-color: #525866;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 8px;
-            text-align: center; 
-            display: block; 
-            width: fit-content; 
-            margin: auto; 
-        }
     
-        .download-button:hover {
-            background-color: #363b49;
-        }
-        
-        .image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 16px;
-            border: 1px solid #525866;
-            border-radius: 4px;
-            padding: 16px;
-            background-color: #363b49;
-        }
-        
-        .trailer-item {
-            border-bottom: 1px solid #525866; /* Добавляем линии-разделители между элементами */
-            padding-bottom: 16px; /* Отступ снизу для более красивого отображения */
-        }
-    
-        .trailer-data {
-            display: flex;
-            flex-direction: column; /* Отображение данных по вертикали */
-        }
-    
-        .download-button {
-            background-color: #525866;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-    
-        .download-button:hover {
-            background-color: #363b49;
-        }
-
-    </style>
 </head>
 <body>
     {% block content %}
+    {% include "get_car_data/search_trailer_data.html"%}
     <div class="container">
         <h2>Данные на полуприцепы</h2> 
         <ul>
@@ -141,20 +36,25 @@
         </ul>
     </div>
 
-    <script>
-        function toggleCarData(item) {
-            item.classList.toggle('active');
-        }
+    <div class="pagination">
+        <span class="step-links">
+            {% if trailer_data.has_previous %}
+                <a href="?page=1">&laquo; первая</a>
+                <a href="?page={{ trailer_data.previous_page_number }}">предыдущая</a>
+            {% endif %}
 
-        function downloadTrailerData(trailerId) {
-            window.location.href = `/get_car_data/download/${trailerId}/`;
-        }
+            <span class="current">
+                Страница {{ trailer_data.number }} из {{ trailer_data.paginator.num_pages }}.
+            </span>
 
-        function showNoFilePopup() {
-            alert('Файл для скачивания отсутствует.');
-        }
+            {% if trailer_data.has_next %}
+                <a href="?page={{ trailer_data.next_page_number }}">следующая</a>
+                <a href="?page={{ trailer_data.paginator.num_pages }}">последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 
-    </script>
+
     {% endblock content %}
 </body>
 </html>

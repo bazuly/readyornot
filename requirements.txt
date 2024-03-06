@@ -4,3 +4,6 @@ django-crispy-forms
 crispy-bootstrap5
 pillow
 django-extensions
+psycopg2-binary
+python-decouple
+python-dotenv

@@ -14,7 +14,7 @@ class ClientCreateView(CreateView):
     template_name = 'client/new_client.html'
     success_url = reverse_lazy('manager_client:new_client_success')
 
-
+    
 def new_client_success(request):
     return render(request,
                   'client/new_client_success.html')
@@ -24,7 +24,7 @@ def new_client_success(request):
 def get_client_data(request):
     client_data = Client.objects.all()
     
-    items_per_page = 3
+    items_per_page = 1
     paginator = Paginator(client_data, items_per_page)
     
     page = request.GET.get('page')
@@ -43,7 +43,7 @@ def get_client_data(request):
     
     return render(request, 'client/list_client.html', context)
 
-
+# !!! Сделатьь нормальный поиск, с автокомплитом, как я реализовал в отчете
 @login_required
 def search_client(request):
     query = request.GET.get('q')
@@ -51,8 +51,7 @@ def search_client(request):
     if query:
         clients = Client.objects.filter(
             Q(name__icontains=query) |
-            Q(manager__icontains=query) |
-            Q(contacts__icontains=query)
+            Q(manager__icontains=query) 
         )
     else:
         clients = Client.objects.all()
