@@ -24,7 +24,7 @@ def new_client_success(request):
 def get_client_data(request):
     client_data = Client.objects.all()
     
-    items_per_page = 1
+    items_per_page = 3
     paginator = Paginator(client_data, items_per_page)
     
     page = request.GET.get('page')
@@ -33,7 +33,7 @@ def get_client_data(request):
         
     except PageNotAnInteger:
         client_data = paginator.page(1)
-        
+
     except EmptyPage:
         client_data = paginator.page(paginator.num_pages)
     
@@ -43,16 +43,19 @@ def get_client_data(request):
     
     return render(request, 'client/list_client.html', context)
 
-# !!! Сделатьь нормальный поиск, с автокомплитом, как я реализовал в отчете
+
 @login_required
 def search_client(request):
     query = request.GET.get('q')
-    
+
     if query:
+        query_lower = query.lower()
         clients = Client.objects.filter(
-            Q(name__icontains=query) |
-            Q(manager__icontains=query) 
+            Q(name__icontains=query_lower) |
+            Q(contacts__icontains=query_lower) |
+            Q(manager__icontains=query_lower)
         )
+        
     else:
         clients = Client.objects.all()
     

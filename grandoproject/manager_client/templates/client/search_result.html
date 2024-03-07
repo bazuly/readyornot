@@ -13,9 +13,9 @@
         <ul>
             {% for data in client_data %}
             <li class="client-item">
-                <div class="client-name">{{ data.name }}</div>
+                <div class="client-name">{{ data.name|upper }}</div>
                 <div class="client-contact">Контактные данные: {{ data.contacts }} </div>
-                <div class="client-manager">Ответственный Менеджер: {{ data.manager }}</div>
+                <div class="client-manager">Ответственный Менеджер: {{ data.manager|title }}</div>
             </li>
             {% endfor %}
     

@@ -20,8 +20,14 @@ class Client(models.Model):
     name = models.CharField(max_length=128, null=False)
     contacts = models.TextField(max_length=700)
     manager = models.CharField(max_length=128, blank=True, null=True, choices=MANAGER_CHOICES)
-    main_email = models.EmailField(max_length=128, blank=True, null=True)
-
+    main_email = models.EmailField(max_length=128, null=False)
+    
+    # сохранение данных в БД в нижнем регистре 
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        self.manager = self.manager.lower()
+        super(Client, self).save(*args, **kwargs)
+    
     def __str__(self):
         return self.name
     
